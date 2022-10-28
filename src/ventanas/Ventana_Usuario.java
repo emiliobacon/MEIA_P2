@@ -75,7 +75,6 @@ public class Ventana_Usuario extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
-        jCalendar1 = new com.toedter.calendar.JCalendar();
         jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -232,8 +231,7 @@ public class Ventana_Usuario extends javax.swing.JFrame {
                                             .addComponent(jButton2)
                                             .addComponent(jButton1)))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(30, 30, 30)
+                                        .addGap(322, 322, 322)
                                         .addComponent(jButton3))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(105, 105, 105)
@@ -281,9 +279,6 @@ public class Ventana_Usuario extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel6))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(77, 77, 77)
                                 .addComponent(jButton3)))))
@@ -511,7 +506,6 @@ public class Ventana_Usuario extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

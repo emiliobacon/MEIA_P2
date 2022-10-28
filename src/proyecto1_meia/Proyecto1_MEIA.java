@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package proyecto1_meia;
+import clases.JavaFileExplorer;
+import clases.Musica;
 import clases.reorganizar;
 import clases.ficheros;
 import clases.sort_log;
@@ -11,6 +13,7 @@ import clases.write_bitacora_descriptor;
 import java.io.IOException;
 import ventanas.Ventana_login;
 import clases.write_usuario_descriptor;
+import java.nio.file.Path;
 
 
 /**
@@ -22,7 +25,7 @@ public class Proyecto1_MEIA {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, Exception {
         // TODO code application logic here
         
         ficheros fichero = new ficheros();
@@ -35,9 +38,10 @@ public class Proyecto1_MEIA {
         
         Ventana_login menu = new Ventana_login();
         
-        menu.setVisible(true);      
+          
+        Musica.getInputPath("C:\\Users\\emili\\Desktop");
         
-        
+        menu.setVisible(true);   
         
         
     }
