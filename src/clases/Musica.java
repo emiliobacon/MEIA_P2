@@ -11,8 +11,19 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Musica 
 {
-  
-   public static Path getInputPath(String s) 
+    public static void Cargar()
+    {
+        //abre el explorador
+        //permite elegir solo .mp3 
+        //mueve de la ubicacion a la carpeta MEIA 
+        getInputPath("C:\\Users\\emili\\Desktop");
+        
+        
+    }
+   
+    
+    
+    public static Path getInputPath(String s) 
    {
        
         JFileChooser jd= s == null ? new JFileChooser() : new JFileChooser(s);
@@ -57,4 +68,6 @@ public class Musica
             System.out.println("Failed to move the file");
         }
    }
+   
+   
 }

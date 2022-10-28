@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package proyecto1_meia;
-import clases.JavaFileExplorer;
+
 import clases.Musica;
 import clases.reorganizar;
 import clases.ficheros;
@@ -39,7 +39,7 @@ public class Proyecto1_MEIA {
         Ventana_login menu = new Ventana_login();
         
           
-        Musica.getInputPath("C:\\Users\\emili\\Desktop");
+        
         
         menu.setVisible(true);   
         

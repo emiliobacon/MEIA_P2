@@ -121,6 +121,7 @@ public class Ventana_Administrador extends javax.swing.JFrame {
         jTextField8 = new javax.swing.JTextField();
         jButton12 = new javax.swing.JButton();
         jTextField3 = new javax.swing.JTextField();
+        jCalendar1 = new com.toedter.calendar.JCalendar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -354,7 +355,7 @@ public class Ventana_Administrador extends javax.swing.JFrame {
                                 .addComponent(label_usuario))
                             .addComponent(jLabelFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btn_imagen1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                        .addGap(8, 8, 8)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel9)
@@ -390,7 +391,8 @@ public class Ventana_Administrador extends javax.swing.JFrame {
                                                     .addComponent(jButton2)
                                                     .addComponent(jButton1)))
                                             .addGroup(layout.createSequentialGroup()
-                                                .addGap(283, 283, 283)
+                                                .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, Short.MAX_VALUE)
+                                                .addGap(107, 107, 107)
                                                 .addComponent(jButton3))))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(80, 80, 80)
@@ -485,9 +487,11 @@ public class Ventana_Administrador extends javax.swing.JFrame {
                             .addComponent(jButton1))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel6)
-                                .addGap(167, 167, 167)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(30, 30, 30)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel9)
                                     .addComponent(btn_imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1064,6 +1068,7 @@ public class Ventana_Administrador extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
+    private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
