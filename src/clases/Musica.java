@@ -1,7 +1,9 @@
 package clases;
 import java.awt.Desktop;
 import java.awt.Desktop.Action; 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.nio.file.Path;
 import javax.swing.JFileChooser;
 import java.nio.file.Path;
@@ -13,10 +15,13 @@ public class Musica
 {
     public static void Cargar()
     {
+        
         //abre el explorador
         //permite elegir solo .mp3 
         //mueve de la ubicacion a la carpeta MEIA 
         getInputPath("C:\\Users\\emili\\Desktop");
+        
+        
         
         
     }
@@ -44,6 +49,7 @@ public class Musica
         File song = new File(ruta);
         String SongName = song.getName();
         
+        Insertar(SongName, 1);
         
         //mover el archivo a la carpeta MEIA
         Mover(ruta, SongName);
@@ -67,6 +73,39 @@ public class Musica
         {
             System.out.println("Failed to move the file");
         }
+   }
+   
+   public static String Artista(String nombreCompleto)
+   {       
+       String[] arrOfStr = nombreCompleto.split("-",0);
+       return arrOfStr.toString();        
+   }
+   
+   public static void Insertar(String cancion, String artista, int codigo)
+   {
+        try
+        {    
+            File file =new File("\"C:\\MEIA\\canciones.txt\"");    
+            //if file doesnt exists, then create it    
+            if(!file.exists())
+            {    
+                file.createNewFile();          
+            }    
+
+            //true = append file    
+                FileWriter fileWritter = new FileWriter(file,true);        
+                BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
+                bufferWritter.write
+                (
+                     codigo + "|" + cancion + "|"  
+                );
+                bufferWritter.close();
+                fileWritter.close();
+        }
+        catch(Exception e)
+        {    
+            e.printStackTrace();    
+        } 
    }
    
    
