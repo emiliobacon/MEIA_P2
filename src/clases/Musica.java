@@ -36,7 +36,7 @@ public class Musica
         File song = new File(ruta);
         String SongName = song.getName();
         
-        Insertar(SongName, Artista(SongName), ruta, usuario, 1);
+        Insertar(NombreCompleto(SongName), Artista(SongName), ruta, usuario, 1);
         
         //mover el archivo a la carpeta MEIA
         Mover(ruta, SongName);
@@ -67,9 +67,19 @@ public class Musica
 
         String[] split = nombreCompleto.split("-");
         String prueba = split[1];
-
+        
+        String[] split2 = prueba.split(".mp3");
+        String artista = split2[0];
        
-       return prueba;       
+       return artista;       
+   }
+   
+   public static String NombreCompleto(String nombre)
+   {
+       String[] split = nombre.split("-");
+       String prueba = split[0];
+       
+       return prueba;
    }
    
    public static void Insertar(String cancion, String artista, String ruta, String usuario,  int codigo)

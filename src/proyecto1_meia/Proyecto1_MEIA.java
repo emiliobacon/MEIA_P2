@@ -18,6 +18,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  *
  * @author megan
@@ -38,10 +39,10 @@ public class Proyecto1_MEIA {
         fichero.crearFicheroNoDesc("C:\\MEIA\\desc_bitacora_usuario.txt");
         fichero.crearFicheroNoDesc("C:\\MEIA\\desc_bitacora_backup.txt");
         
-        List<String> Canciones = new ArrayList<>();
+       Ventana_login menu = new Ventana_login();
+       menu.setVisible(true); 
         
-        Ventana_login menu = new Ventana_login();
-        menu.setVisible(true);   
+       
         
         
     }
