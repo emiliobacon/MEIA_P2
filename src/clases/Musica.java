@@ -98,7 +98,7 @@ public class Musica
                 BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
                 bufferWritter.write
                 (
-                    codigo + "|" + cancion + "|" + artista + "|" + ruta + "|" + usuario + "|" + descriptor.modDate() + "|" + 1  
+                    codigo + "|" + cancion + "|" + artista + "|" + ruta + "|" + usuario + "|" + descriptor.modDate() + "|" + "1\n" 
                 );
                 bufferWritter.close();
                 fileWritter.close();

@@ -4,7 +4,12 @@
  */
 package ventanas;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 
 /**
@@ -18,11 +23,23 @@ public class Ventana_ListaCanciones extends javax.swing.JFrame {
     /**
      * Creates new form Ventana_ListaCanciones
      */
-    public Ventana_ListaCanciones() {
+    public Ventana_ListaCanciones() throws IOException {
         initComponents();
         listaCanciones.setModel(modelo);
+        //leer musica desde el archivo para poner en la lista 
+        BufferedReader reader = new BufferedReader(new FileReader("C:\\MEIA\\canciones.txt"));
+        ArrayList<String> str = new ArrayList<>();
+        String line = "";
+    
+        while ((line = reader.readLine()) != null)
+        {  
+            String[] split = line.split("\\|");
+            String prueba = split[1];
+
+            array.add(prueba);                          
+        }
+        reader.close(); 
         
-        array.add("prueba");
         modelo.removeAllElements();
         for (int i = 0; i < array.size(); i++) {
             modelo.addElement(array.get(i));
@@ -40,6 +57,7 @@ public class Ventana_ListaCanciones extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         listaCanciones = new javax.swing.JList<>();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -50,21 +68,30 @@ public class Ventana_ListaCanciones extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(listaCanciones);
 
+        jLabel1.setText("Lista de Canciones");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(77, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(86, 86, 86)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(96, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58))
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
@@ -100,12 +127,17 @@ public class Ventana_ListaCanciones extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Ventana_ListaCanciones().setVisible(true);
+                try {
+                    new Ventana_ListaCanciones().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(Ventana_ListaCanciones.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<String> listaCanciones;
     // End of variables declaration//GEN-END:variables
