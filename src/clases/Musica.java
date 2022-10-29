@@ -12,24 +12,10 @@ import java.nio.file.Path;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Musica 
-{
-    public static void Cargar()
-    {
-        
-        //abre el explorador
-        //permite elegir solo .mp3 
-        //mueve de la ubicacion a la carpeta MEIA 
-        getInputPath("C:\\Users\\emili\\Desktop");
-        
-        
-        
-        
-    }
-   
-    
-    
-    public static Path getInputPath(String s) 
+{    
+    public static Path CargarMusica(String usuario) 
    {
+       String s = null;
        
         JFileChooser jd= s == null ? new JFileChooser() : new JFileChooser(s);
         jd.setDialogTitle("Elija música para cargar...");
@@ -44,12 +30,13 @@ public class Musica
         
         if (returnVal != JFileChooser.APPROVE_OPTION) return null;
         
+        
         String ruta = (jd.getSelectedFile().toString());
         
         File song = new File(ruta);
         String SongName = song.getName();
         
-        Insertar(SongName, 1);
+        Insertar(SongName, Artista(SongName), ruta, usuario, 1);
         
         //mover el archivo a la carpeta MEIA
         Mover(ruta, SongName);
@@ -76,16 +63,20 @@ public class Musica
    }
    
    public static String Artista(String nombreCompleto)
-   {       
-       String[] arrOfStr = nombreCompleto.split("-",0);
-       return arrOfStr.toString();        
+   {
+
+        String[] split = nombreCompleto.split("-");
+        String prueba = split[1];
+
+       
+       return prueba;       
    }
    
-   public static void Insertar(String cancion, String artista, int codigo)
+   public static void Insertar(String cancion, String artista, String ruta, String usuario,  int codigo)
    {
         try
         {    
-            File file =new File("\"C:\\MEIA\\canciones.txt\"");    
+            File file =new File("C:\\MEIA\\canciones.txt");    
             //if file doesnt exists, then create it    
             if(!file.exists())
             {    
@@ -97,7 +88,7 @@ public class Musica
                 BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
                 bufferWritter.write
                 (
-                     codigo + "|" + cancion + "|"  
+                    codigo + "|" + cancion + "|" + artista + "|" + ruta + "|" + usuario + "|" + descriptor.modDate() + "|" + 1  
                 );
                 bufferWritter.close();
                 fileWritter.close();

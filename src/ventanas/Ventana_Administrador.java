@@ -5,6 +5,7 @@
  */
 package ventanas;
 
+import clases.Musica;
 import clases.actualizar;
 import clases.bitacoraBackUp;
 import clases.descriptor;
@@ -122,6 +123,7 @@ public class Ventana_Administrador extends javax.swing.JFrame {
         jButton12 = new javax.swing.JButton();
         jTextField3 = new javax.swing.JTextField();
         jCalendar1 = new com.toedter.calendar.JCalendar();
+        btnCargarMusica = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -335,6 +337,13 @@ public class Ventana_Administrador extends javax.swing.JFrame {
             }
         });
 
+        btnCargarMusica.setText("Cargar Música");
+        btnCargarMusica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCargarMusicaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -460,6 +469,8 @@ public class Ventana_Administrador extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 752, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCargarMusica)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -499,7 +510,8 @@ public class Ventana_Administrador extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel1)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnCargarMusica)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(81, 81, 81)
                                 .addComponent(jButton3)
@@ -988,6 +1000,11 @@ public class Ventana_Administrador extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void btnCargarMusicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarMusicaActionPerformed
+        // TODO add your handling code here:
+        Musica.CargarMusica(usuarioNombre);
+    }//GEN-LAST:event_btnCargarMusicaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1052,6 +1069,7 @@ public class Ventana_Administrador extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCargarMusica;
     private javax.swing.JButton btn_imagen;
     private javax.swing.JButton btn_imagen1;
     private javax.swing.JButton btn_imagen2;
