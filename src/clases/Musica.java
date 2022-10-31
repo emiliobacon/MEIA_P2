@@ -4,19 +4,34 @@ import java.awt.Desktop.Action;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Path;
 import javax.swing.JFileChooser;
 import java.nio.file.Path;
 import javax.swing.JFileChooser;
 import java.nio.file.Path;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import ventanas.Ventana_Administrador;
 
 public class Musica 
 {    
-    public static int codigoCancion = 1; 
-    
-    public static Path CargarMusica(String usuario) 
+
+    public static Path CargarMusica(String usuario) throws IOException 
    {
+        int num_reg_bitacora = 0; 
+        int codigoCancion =0;
+        
+        num_reg_bitacora = descriptor.numRegistros("C:\\MEIA\\canciones.txt");
+
+        if (num_reg_bitacora == 0) 
+        {
+            codigoCancion = 1;
+        } else 
+        {
+            codigoCancion = num_reg_bitacora + 1;
+        }
        String s = null;
        
         JFileChooser jd= s == null ? new JFileChooser() : new JFileChooser(s);
