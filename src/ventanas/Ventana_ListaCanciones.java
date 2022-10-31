@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -34,7 +36,8 @@ public class Ventana_ListaCanciones extends javax.swing.JFrame {
         while ((line = reader.readLine()) != null)
         {  
             String[] split = line.split("\\|");
-            String prueba = split[1];
+            String prueba = split[1] + "-" +split[2];
+            
 
             array.add(prueba);                          
         }
@@ -58,6 +61,8 @@ public class Ventana_ListaCanciones extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         listaCanciones = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
+        btnReproducir = new javax.swing.JButton();
+        lblCancionElegida = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,9 +71,24 @@ public class Ventana_ListaCanciones extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        listaCanciones.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listaCancionesValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(listaCanciones);
 
         jLabel1.setText("Lista de Canciones");
+
+        btnReproducir.setText("Reproducir");
+        btnReproducir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReproducirActionPerformed(evt);
+            }
+        });
+
+        lblCancionElegida.setForeground(new java.awt.Color(153, 153, 153));
+        lblCancionElegida.setText("Canción elegida...");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -81,8 +101,12 @@ public class Ventana_ListaCanciones extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(39, 39, 39)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(38, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnReproducir, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCancionElegida))))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,12 +114,28 @@ public class Ventana_ListaCanciones extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblCancionElegida)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnReproducir)))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnReproducirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReproducirActionPerformed
+        // TODO add your handling code here:
+        
+      
+    }//GEN-LAST:event_btnReproducirActionPerformed
+
+    private void listaCancionesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaCancionesValueChanged
+        // TODO add your handling code here:
+        lblCancionElegida.setText(listaCanciones.getSelectedValue());
+    }//GEN-LAST:event_listaCancionesValueChanged
 
     /**
      * @param args the command line arguments
@@ -137,8 +177,10 @@ public class Ventana_ListaCanciones extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnReproducir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblCancionElegida;
     private javax.swing.JList<String> listaCanciones;
     // End of variables declaration//GEN-END:variables
 }
