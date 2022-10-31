@@ -87,6 +87,32 @@ public class descriptor
         return regActivos;
     }
     
+        
+    public static int numRegistrosActivosCanciones (String Ruta) throws FileNotFoundException, IOException
+    {
+        int regActivos = 0;
+        
+        BufferedReader reader = new BufferedReader(new FileReader(Ruta));
+        
+        String line = "";
+        
+        while ((line = reader.readLine()) != null)
+        {
+            
+                String[] split = line.split("\\|");
+                String prueba = split[6];
+                
+                if (prueba.equals("1")) 
+                {
+                    regActivos ++;
+                } 
+              
+        }
+        reader.close();
+        
+        return regActivos;
+    }
+    
     public static int numRegistrosInactivos (String Ruta) throws FileNotFoundException, IOException
     {
         int regInactivos = 0; 

@@ -9,6 +9,7 @@ import clases.Musica;
 import clases.actualizar;
 import clases.bitacoraBackUp;
 import clases.descriptor;
+import clases.descriptor_canciones;
 import clases.ficheros;
 import clases.write_bitacora_backup;
 import clases.write_bitacora_descriptor;
@@ -1002,7 +1003,38 @@ public class Ventana_Administrador extends javax.swing.JFrame {
 
     private void btnCargarMusicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarMusicaActionPerformed
         // TODO add your handling code here:
-        Musica.CargarMusica(usuarioNombre);
+        
+        
+ 
+        try {
+            int num_reg_bitacora = 0; 
+            num_reg_bitacora = descriptor.numRegistros("C:\\MEIA\\canciones.txt");
+            
+            if (num_reg_bitacora == 0) {
+            try {
+                Musica.CargarMusica(usuarioNombre);
+                descriptor_canciones.run1(usuarioNombre);
+            } catch (IOException ex) {
+                Logger.getLogger(Ventana_Administrador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            } else {
+            try {
+                 Musica.CargarMusica(usuarioNombre);
+                descriptor_canciones.run2(usuarioNombre);
+            } catch (IOException ex) {
+                Logger.getLogger(Ventana_Administrador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            }
+           
+        } catch (IOException ex) {
+            Logger.getLogger(Ventana_Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+
+            
+
+
     }//GEN-LAST:event_btnCargarMusicaActionPerformed
 
     /**

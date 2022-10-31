@@ -13,6 +13,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Musica 
 {    
+    public static int codigoCancion = 1; 
+    
     public static Path CargarMusica(String usuario) 
    {
        String s = null;
@@ -36,11 +38,12 @@ public class Musica
         File song = new File(ruta);
         String SongName = song.getName();
         
-        Insertar(NombreCompleto(SongName), Artista(SongName), ruta, usuario, 1);
+        Insertar(NombreCompleto(SongName), Artista(SongName), ruta, usuario, codigoCancion);
         
         //mover el archivo a la carpeta MEIA
         Mover(ruta, SongName);
        
+        codigoCancion++;
         
         return jd.getSelectedFile().toPath();   
     }  
