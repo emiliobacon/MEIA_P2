@@ -1002,39 +1002,16 @@ public class Ventana_Administrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void btnCargarMusicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarMusicaActionPerformed
-        // TODO add your handling code here:
-        
-        
- 
         try {
-            int num_reg_bitacora = 0; 
-            num_reg_bitacora = descriptor.numRegistros("C:\\MEIA\\canciones.txt");
+            // TODO add your handling code here:
+            Musica.reorganizar();
+            Musica.CargarMusica(usuarioNombre);
             
-            if (num_reg_bitacora == 0) {
-            try {
-                Musica.CargarMusica(usuarioNombre);
-                descriptor_canciones.run1(usuarioNombre);
-            } catch (IOException ex) {
-                Logger.getLogger(Ventana_Administrador.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            } else {
-            try {
-                 Musica.CargarMusica(usuarioNombre);
-                descriptor_canciones.run2(usuarioNombre);
-            } catch (IOException ex) {
-                Logger.getLogger(Ventana_Administrador.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            }
-           
+            descriptor_canciones.descriptorBitacora(usuarioNombre);
+            descriptor_canciones.descriptorCanciones(usuarioNombre);
         } catch (IOException ex) {
             Logger.getLogger(Ventana_Administrador.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-
-            
-
-
     }//GEN-LAST:event_btnCargarMusicaActionPerformed
 
     /**

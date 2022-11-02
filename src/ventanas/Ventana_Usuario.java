@@ -8,6 +8,7 @@ package ventanas;
 import clases.CrearPlaylist;
 import java.awt.Image;
 import clases.actualizar;
+import clases.descriptor_listas_canciones;
 import clases.write_bitacora_descriptor;
 import clases.write_usuario_descriptor;
 import java.awt.image.BufferedImage;
@@ -538,12 +539,15 @@ public class Ventana_Usuario extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
+            
             String nombrePlaylist = txtNombrePlaylist.getText();
             
             try {
                 CrearPlaylist.reorganizar();
                 CrearPlaylist.CrearPlaylist(nombrePlaylist, usuarioNombre);
                 txtNombrePlaylist.setText("Playlist creada");
+                descriptor_listas_canciones.descriptorBitacora(usuarioNombre);
+                descriptor_listas_canciones.descriptorListas(usuarioNombre);
                 
                 
             } catch (IOException ex) {

@@ -36,6 +36,7 @@ public class Ventana_ListaCanciones extends javax.swing.JFrame {
         listaCanciones.setModel(modelo);
         //leer musica desde el archivo para poner en la lista 
         BufferedReader reader = new BufferedReader(new FileReader("C:\\MEIA\\canciones.txt"));
+        BufferedReader reader2 = new BufferedReader(new FileReader("C:\\MEIA\\bitacora_canciones.txt"));
         ArrayList<String> str = new ArrayList<>();
         String line = "";
     
@@ -48,6 +49,16 @@ public class Ventana_ListaCanciones extends javax.swing.JFrame {
             array.add(prueba);                          
         }
         reader.close(); 
+        
+        while ((line = reader2.readLine()) != null)
+        {  
+            String[] split = line.split("\\|");
+            String prueba = split[1] + "-" +split[2];
+            
+
+            array.add(prueba);                          
+        }
+        reader2.close(); 
         
         modelo.removeAllElements();
         for (int i = 0; i < array.size(); i++) {
