@@ -1,15 +1,21 @@
 package clases;
 import java.awt.Desktop;
 import java.awt.Desktop.Action; 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Path;
 import javax.swing.JFileChooser;
 import java.nio.file.Path;
 import javax.swing.JFileChooser;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -21,16 +27,18 @@ public class Musica
     public static Path CargarMusica(String usuario) throws IOException 
    {
         int num_reg_bitacora = 0; 
-        int codigoCancion =0;
+        int num_reg_canciones = 0;
+        int codigoCancion = 1;
         
         num_reg_bitacora = descriptor.numRegistros("C:\\MEIA\\canciones.txt");
+        num_reg_canciones = descriptor.numRegistros("C:\\MEIA\\bitacora_canciones.txt");
 
-        if (num_reg_bitacora == 0) 
+        if (num_reg_bitacora == 0 && num_reg_canciones == 0) 
         {
             codigoCancion = 1;
         } else 
         {
-            codigoCancion = num_reg_bitacora + 1;
+            codigoCancion = num_reg_bitacora + num_reg_canciones + 1;
         }
        String s = null;
        
@@ -69,7 +77,7 @@ public class Musica
          
         // renaming the file and moving it to a new location
         if(file.renameTo
-           (new File("C:\\MEIA\\" + name )))
+           (new File("C:\\MEIA\\Musica\\" + name )))
         {
             // if file copied successfully then delete the original file
             file.delete();    
@@ -104,7 +112,7 @@ public class Musica
    {
         try
         {    
-            File file =new File("C:\\MEIA\\canciones.txt");    
+            File file =new File("C:\\MEIA\\bitacora_canciones.txt");    
             //if file doesnt exists, then create it    
             if(!file.exists())
             {    
@@ -127,5 +135,61 @@ public class Musica
         } 
    }
    
+       public static void reorganizar() throws FileNotFoundException, IOException
+    {
+        //si hay mas de 3 playlists 
+        BufferedReader reader = new BufferedReader(new FileReader("C:\\MEIA\\bitacora_canciones.txt"));
+        BufferedReader reader3 = new BufferedReader(new FileReader("C:\\MEIA\\bitacora_canciones.txt"));
+        BufferedReader reader2 = new BufferedReader(new FileReader("C:\\MEIA\\canciones.txt"));
+        String line = "";
+        String line2 = "";
+         ArrayList<String> str = new ArrayList<>();
+        
+        int contador = 0; 
+        
+        while(reader3.readLine() != null)
+        {
+            contador++;
+        }
+        
+        if (contador == 3)
+        {
+            while ((line = reader.readLine()) != null)
+            {
+                        str.add(line);                         
+            }
+            reader.close();
+            
+            while ((line2 = reader2.readLine()) != null)
+            {
+                        str.add(line2);                       
+            }
+            reader2.close();
+            
+            Collections.sort(str);
+            
+            FileWriter writer = new FileWriter("C:\\MEIA\\canciones.txt");
+            for (String s: str)
+            {
+                writer.write(s);
+                writer.write("\r\n");
+            }
+            writer.close();
+
+            try
+            {
+                FileWriter fw = new FileWriter("C:\\MEIA\\bitacora_canciones.txt", false);
+                PrintWriter pw = new PrintWriter(fw, false);
+                pw.flush();
+                pw.close();
+                fw.close();
+            }
+            catch(Exception exception)
+            {
+                
+            }
+
+        }
+   }
    
 }

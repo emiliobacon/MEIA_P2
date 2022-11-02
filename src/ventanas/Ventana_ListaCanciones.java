@@ -4,7 +4,11 @@
  */
 package ventanas;
 
+
+import clases.PlaySong;
+import clases.descriptor;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,6 +17,8 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javazoom.jl.decoder.JavaLayerException;
+
 
 /**
  *
@@ -30,6 +36,7 @@ public class Ventana_ListaCanciones extends javax.swing.JFrame {
         listaCanciones.setModel(modelo);
         //leer musica desde el archivo para poner en la lista 
         BufferedReader reader = new BufferedReader(new FileReader("C:\\MEIA\\canciones.txt"));
+        BufferedReader reader2 = new BufferedReader(new FileReader("C:\\MEIA\\bitacora_canciones.txt"));
         ArrayList<String> str = new ArrayList<>();
         String line = "";
     
@@ -42,6 +49,16 @@ public class Ventana_ListaCanciones extends javax.swing.JFrame {
             array.add(prueba);                          
         }
         reader.close(); 
+        
+        while ((line = reader2.readLine()) != null)
+        {  
+            String[] split = line.split("\\|");
+            String prueba = split[1] + "-" +split[2];
+            
+
+            array.add(prueba);                          
+        }
+        reader2.close(); 
         
         modelo.removeAllElements();
         for (int i = 0; i < array.size(); i++) {
@@ -127,8 +144,8 @@ public class Ventana_ListaCanciones extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnReproducirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReproducirActionPerformed
-        // TODO add your handling code here:
-        
+
+
       
     }//GEN-LAST:event_btnReproducirActionPerformed
 
