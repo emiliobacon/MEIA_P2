@@ -8,6 +8,7 @@ package ventanas;
 import clases.CrearPlaylist;
 import java.awt.Image;
 import clases.actualizar;
+import clases.canciones_playlist;
 import clases.descriptor_listas_canciones;
 import clases.write_bitacora_descriptor;
 import clases.write_usuario_descriptor;
@@ -152,6 +153,7 @@ public class Ventana_Usuario extends javax.swing.JFrame {
         musicaagregar = new javax.swing.JLabel();
         playlistAgregar = new javax.swing.JLabel();
         btnPlay = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -327,6 +329,8 @@ public class Ventana_Usuario extends javax.swing.JFrame {
 
         btnPlay.setText("Reproducir: ");
 
+        jLabel12.setText("jLabel12");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -425,7 +429,8 @@ public class Ventana_Usuario extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel15)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(musicaagregar)))))
+                                        .addComponent(musicaagregar))
+                                    .addComponent(jLabel12))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 275, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblCancionElegida)
@@ -473,7 +478,9 @@ public class Ventana_Usuario extends javax.swing.JFrame {
                                             .addComponent(playlistAgregar))
                                         .addGap(13, 13, 13)
                                         .addComponent(jButton9)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel12)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                                         .addComponent(jLabel14)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -697,7 +704,14 @@ public class Ventana_Usuario extends javax.swing.JFrame {
     }//GEN-LAST:event_PlaylistsValueChanged
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            jLabel12.setText(canciones_playlist.Concatenar(usuarioNombre,playlistAgregar.getText(),musicaagregar.getText()));
+        } catch (IOException ex) {
+            Logger.getLogger(Ventana_Usuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
@@ -838,6 +852,7 @@ public class Ventana_Usuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
