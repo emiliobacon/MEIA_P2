@@ -27,6 +27,7 @@ public class ArchivoSecuencialIndizado {
         if (numeroBloque ==0) {
             FileWriter Escribir = new FileWriter("C:/MEIA/Bloque1.txt",true);
             BufferedWriter bw1 = new BufferedWriter(Escribir);
+            bw1.write(usuario+System.getProperty("line.separator"));
             bw1.close();
             Escribir.close();
             
