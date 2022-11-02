@@ -4,7 +4,11 @@
  */
 package ventanas;
 
+
+import clases.PlaySong;
+import clases.descriptor;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,6 +17,8 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javazoom.jl.decoder.JavaLayerException;
+
 
 /**
  *
@@ -127,8 +133,8 @@ public class Ventana_ListaCanciones extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnReproducirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReproducirActionPerformed
-        // TODO add your handling code here:
-        
+
+
       
     }//GEN-LAST:event_btnReproducirActionPerformed
 
