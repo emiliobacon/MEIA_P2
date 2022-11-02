@@ -5,18 +5,9 @@
  */
 package proyecto1_meia;
 
-import clases.Musica;
-import clases.reorganizar;
 import clases.ficheros;
-import clases.sort_log;
-import clases.write_bitacora_descriptor;
 import java.io.IOException;
 import ventanas.Ventana_login;
-import clases.write_usuario_descriptor;
-
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -38,6 +29,7 @@ public class Proyecto1_MEIA {
         fichero.crearFicheroNoDesc("C:\\MEIA\\desc_usuario.txt");
         fichero.crearFicheroNoDesc("C:\\MEIA\\desc_bitacora_usuario.txt");
         fichero.crearFicheroNoDesc("C:\\MEIA\\desc_bitacora_backup.txt");
+        fichero.crearFicheroNoDesc("C:\\MEIA\\canciones.txt");
         
        Ventana_login menu = new Ventana_login();
        menu.setVisible(true); 

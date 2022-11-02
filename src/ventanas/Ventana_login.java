@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package ventanas;
-import clases.ficheros;
 import clases.contar_usuario;
 import clases.reorganizar;
 import clases.sort_log;
@@ -21,7 +20,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import ventanas.Ventana_Administrador;
 
 /**
  *
