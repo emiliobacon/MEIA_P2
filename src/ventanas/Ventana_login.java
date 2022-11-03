@@ -261,7 +261,7 @@ public class Ventana_login extends javax.swing.JFrame {
             Logger.getLogger(Ventana_login.class.getName()).log(Level.SEVERE, null, ex);
         }
        
-        this.dispose(); //cerrar a ventana abierta
+         //cerrar a ventana abierta
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
