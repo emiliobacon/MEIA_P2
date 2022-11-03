@@ -6,6 +6,7 @@
 package ventanas;
 
 import clases.CrearPlaylist;
+import clases.ArchivoSecuencialIndizado;
 import java.awt.Image;
 import clases.actualizar;
 import clases.canciones_playlist;
@@ -704,9 +705,11 @@ public class Ventana_Usuario extends javax.swing.JFrame {
     }//GEN-LAST:event_PlaylistsValueChanged
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+        ArchivoSecuencialIndizado archivoSec = new ArchivoSecuencialIndizado() ;
         try {
-            // TODO add your handling code here:
-            jLabel12.setText(canciones_playlist.Concatenar(usuarioNombre,playlistAgregar.getText(),musicaagregar.getText()));
+            archivoSec.insercion(usuarioNombre, playlistAgregar.getText(), canciones_playlist.Codigo_Cancion(musicaagregar.getText()));
+            //jLabel12.setText(canciones_playlist.Concatenar(usuarioNombre,playlistAgregar.getText(),musicaagregar.getText()));
         } catch (IOException ex) {
             Logger.getLogger(Ventana_Usuario.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -834,6 +837,7 @@ public class Ventana_Usuario extends javax.swing.JFrame {
             throw new RuntimeException(e);
         }
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelFoto;
