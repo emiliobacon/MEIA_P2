@@ -7,6 +7,7 @@ package ventanas;
 
 import clases.PlaySong;
 import clases.descriptor;
+import clases.playSongs;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -80,6 +81,7 @@ public class Ventana_ListaCanciones extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnReproducir = new javax.swing.JButton();
         lblCancionElegida = new javax.swing.JLabel();
+        btnStop = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -107,6 +109,13 @@ public class Ventana_ListaCanciones extends javax.swing.JFrame {
         lblCancionElegida.setForeground(new java.awt.Color(153, 153, 153));
         lblCancionElegida.setText("Canción elegida...");
 
+        btnStop.setText("Detener");
+        btnStop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStopActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -120,9 +129,10 @@ public class Ventana_ListaCanciones extends javax.swing.JFrame {
                         .addGap(39, 39, 39)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnReproducir, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblCancionElegida))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnReproducir, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                            .addComponent(lblCancionElegida)
+                            .addComponent(btnStop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -136,7 +146,9 @@ public class Ventana_ListaCanciones extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblCancionElegida)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnReproducir)))
+                        .addComponent(btnReproducir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnStop)))
                 .addContainerGap(42, Short.MAX_VALUE))
         );
 
@@ -144,7 +156,7 @@ public class Ventana_ListaCanciones extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnReproducirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReproducirActionPerformed
-
+        playSongs.play(lblCancionElegida.getText());
 
       
     }//GEN-LAST:event_btnReproducirActionPerformed
@@ -153,6 +165,11 @@ public class Ventana_ListaCanciones extends javax.swing.JFrame {
         // TODO add your handling code here:
         lblCancionElegida.setText(listaCanciones.getSelectedValue());
     }//GEN-LAST:event_listaCancionesValueChanged
+
+    private void btnStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStopActionPerformed
+        // TODO add your handling code here:
+         playSongs.stop(lblCancionElegida.getText());
+    }//GEN-LAST:event_btnStopActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,6 +212,7 @@ public class Ventana_ListaCanciones extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnReproducir;
+    private javax.swing.JButton btnStop;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCancionElegida;

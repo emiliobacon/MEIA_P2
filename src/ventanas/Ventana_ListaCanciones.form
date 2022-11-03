@@ -33,9 +33,10 @@
                       <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="187" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnReproducir" min="-2" pref="167" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="btnReproducir" pref="167" max="32767" attributes="0"/>
                           <Component id="lblCancionElegida" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnStop" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -55,6 +56,8 @@
                       <Component id="lblCancionElegida" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnReproducir" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnStop" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="42" max="32767" attributes="0"/>
@@ -111,6 +114,14 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Canci&#xf3;n elegida..."/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnStop">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Detener"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStopActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
