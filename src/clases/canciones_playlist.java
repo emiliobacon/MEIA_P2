@@ -2,10 +2,7 @@ package clases;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
 
 public class canciones_playlist {
     
@@ -18,7 +15,7 @@ public class canciones_playlist {
     
     }
     
-    private static String Codigo_Cancion(String Cancion) throws IOException
+    public static String Codigo_Cancion(String Cancion) throws IOException
     {
         String codigo = "";
         

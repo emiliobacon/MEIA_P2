@@ -6,6 +6,7 @@
 package ventanas;
 
 import clases.CrearPlaylist;
+import clases.ArchivoSecuencialIndizado;
 import java.awt.Image;
 import clases.actualizar;
 import clases.canciones_playlist;
@@ -48,7 +49,8 @@ public class Ventana_Usuario extends javax.swing.JFrame {
     ArrayList array2 = new ArrayList();
     DefaultListModel modelo2 = new DefaultListModel();
     
-  
+    ArrayList array3 = new ArrayList();
+    DefaultListModel modelo3 = new DefaultListModel();    
     
     
     /**
@@ -96,6 +98,7 @@ public class Ventana_Usuario extends javax.swing.JFrame {
         for (int i = 0; i < array2.size(); i++) {
             modelo2.addElement(array2.get(i));
         }
+        array2.removeAll(array2);
     }
 
     /**
@@ -153,7 +156,6 @@ public class Ventana_Usuario extends javax.swing.JFrame {
         musicaagregar = new javax.swing.JLabel();
         playlistAgregar = new javax.swing.JLabel();
         btnPlay = new javax.swing.JButton();
-        jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -329,8 +331,6 @@ public class Ventana_Usuario extends javax.swing.JFrame {
 
         btnPlay.setText("Reproducir: ");
 
-        jLabel12.setText("jLabel12");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -381,11 +381,12 @@ public class Ventana_Usuario extends javax.swing.JFrame {
                                                     .addComponent(jButton4)))
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                 .addComponent(txt_Telefono)
-                                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(16, 16, 16)
-                                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE))))
+                                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -429,8 +430,7 @@ public class Ventana_Usuario extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel15)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(musicaagregar))
-                                    .addComponent(jLabel12))))
+                                        .addComponent(musicaagregar)))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 275, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblCancionElegida)
@@ -478,9 +478,7 @@ public class Ventana_Usuario extends javax.swing.JFrame {
                                             .addComponent(playlistAgregar))
                                         .addGap(13, 13, 13)
                                         .addComponent(jButton9)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel12)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
                                         .addComponent(jLabel14)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -670,43 +668,128 @@ public class Ventana_Usuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
+        
+        
+        try {
+            // TODO add your handling code here:
             
             String nombrePlaylist = txtNombrePlaylist.getText();
             
-            try {
-                CrearPlaylist.reorganizar();
-                CrearPlaylist.CrearPlaylist(nombrePlaylist, usuarioNombre);
-                txtNombrePlaylist.setText("Playlist creada");
-                descriptor_listas_canciones.descriptorBitacora(usuarioNombre);
-                descriptor_listas_canciones.descriptorListas(usuarioNombre);
-                
-                
-            } catch (IOException ex) {
-                Logger.getLogger(Ventana_Usuario.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            CrearPlaylist.reorganizar();
+            CrearPlaylist.CrearPlaylist(nombrePlaylist, usuarioNombre);
+            txtNombrePlaylist.setText("Playlist creada");
+            descriptor_listas_canciones.descriptorBitacora(usuarioNombre);
+            descriptor_listas_canciones.descriptorListas(usuarioNombre);
             
-                    try {
+            modelo.removeAllElements();    
             actualizarListaPlaylists();
         } catch (IOException ex) {
-            Logger.getLogger(Ventana_Usuario.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
+
             
      
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void PlaylistsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_PlaylistsValueChanged
-        // TODO add your handling code here:
-        lblPlaylistElegida.setText(Playlists.getSelectedValue());
-        playlistAgregar.setText(Playlists.getSelectedValue());
         
-        //mostrar las canciones que hay en la playlist 
-    }//GEN-LAST:event_PlaylistsValueChanged
-
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         try {
             // TODO add your handling code here:
-            jLabel12.setText(canciones_playlist.Concatenar(usuarioNombre,playlistAgregar.getText(),musicaagregar.getText()));
+            lblPlaylistElegida.setText(Playlists.getSelectedValue());
+            playlistAgregar.setText(Playlists.getSelectedValue());
+            String playlist = Playlists.getSelectedValue();
+            
+            cancionesLista(playlist, usuarioNombre);
+        } catch (IOException ex) {
+            Logger.getLogger(Ventana_Usuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      
+        
+       
+        
+       
+     
+       
+        
+    }//GEN-LAST:event_PlaylistsValueChanged
+
+    public void cancionesLista(String Playlist, String usuario) throws FileNotFoundException, IOException
+    { 
+        jList2.setModel(modelo3);
+        
+        BufferedReader reader = new BufferedReader(new FileReader("C:\\MEIA\\Indice.txt"));
+       
+        
+        ArrayList<String> str = new ArrayList<>();
+        String line = "";   
+        String line2 = "";
+        String line3 = "";
+        while ((line = reader.readLine()) != null)
+        {  
+            BufferedReader reader2 = new BufferedReader(new FileReader("C:\\MEIA\\bitacora_canciones.txt"));
+            BufferedReader reader3 = new BufferedReader(new FileReader("C:\\MEIA\\canciones.txt")); 
+            
+            
+            String[] split = line.split("\\|");
+            String playlist = split[3];
+            String codigo = split[4];
+            String Usuario = split[2];
+            
+            if (playlist.equals(Playlist) && usuario.equals(Usuario)) {
+                
+                //leer canciones en la primera ubicacion
+                while((line2 = reader2.readLine()) != null )
+                {
+                    String[] split2 = line2.split("\\|");
+                    String codigoCancion = split2[0];
+                    String cancion = split2[1] + "-" + split2[2];
+                    
+                    if (codigo.equals(codigoCancion)) 
+                    {                       
+                        array3.add(cancion);
+                        line2 = "";
+                    }
+                }
+                reader2.close();
+                
+                //canciones en la segunda ubicacion
+                while((line3 = reader3.readLine()) != null )
+                {
+                    String[] split3 = line3.split("\\|");
+                    String codigoCancion = split3[0];
+                    String cancion = split3[1] + "-" + split3[2];
+                    
+                    if (codigo.equals(codigoCancion)) 
+                    {                       
+                        array3.add(cancion);
+                        line3 ="";
+                    }
+                }
+                reader3.close();
+                
+            }       
+        }
+        reader.close(); 
+        
+        
+        
+        modelo3.removeAllElements();
+        for (int i = 0; i < array3.size(); i++) 
+        {
+            modelo3.addElement(array3.get(i));
+        }
+        array3.removeAll(array3);
+        
+        
+     
+    }
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+        ArchivoSecuencialIndizado archivoSec = new ArchivoSecuencialIndizado() ;
+        
+        try {
+            archivoSec.insercion(usuarioNombre, playlistAgregar.getText(), canciones_playlist.Codigo_Cancion(musicaagregar.getText()));
+            //jLabel12.setText(canciones_playlist.Concatenar(usuarioNombre,playlistAgregar.getText(),musicaagregar.getText()));
         } catch (IOException ex) {
             Logger.getLogger(Ventana_Usuario.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -724,11 +807,18 @@ public class Ventana_Usuario extends javax.swing.JFrame {
         // TODO add your handling code here:
          btnPlay.setText("Reproducir: " + jList2.getSelectedValue());
     }//GEN-LAST:event_jList2ValueChanged
-
+    
+    public void vaciarPlaylist()
+    {
+        Playlists.setModel(modelo);
+        modelo.removeAllElements();
+        
+    }
     public void actualizarListaPlaylists () throws FileNotFoundException, IOException
     {
+        
         BufferedReader reader = new BufferedReader(new FileReader("C:\\MEIA\\listas_canciones.txt"));
-         BufferedReader reader2 = new BufferedReader(new FileReader("C:\\MEIA\\bitacora_listas_canciones.txt"));
+        BufferedReader reader2 = new BufferedReader(new FileReader("C:\\MEIA\\bitacora_listas_canciones.txt"));
         Playlists.setModel(modelo);
        
  
@@ -766,6 +856,7 @@ public class Ventana_Usuario extends javax.swing.JFrame {
         for (int i = 0; i < array.size(); i++) {
             modelo.addElement(array.get(i));
         }
+        array.removeAll(array);
     }
     /**
      * @param args the command line arguments
@@ -834,6 +925,7 @@ public class Ventana_Usuario extends javax.swing.JFrame {
             throw new RuntimeException(e);
         }
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelFoto;
@@ -852,7 +944,6 @@ public class Ventana_Usuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
