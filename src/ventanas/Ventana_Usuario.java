@@ -886,6 +886,7 @@ public class Ventana_Usuario extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             sortBinarySearchTree.sortArtist();
+            descriptor_listas_canciones.descriptorArbolBinario(usuarioNombre);
         } catch (IOException ex) {
             Logger.getLogger(Ventana_Usuario.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -895,6 +896,7 @@ public class Ventana_Usuario extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             sortBinarySearchTree.sortSong();
+            descriptor_listas_canciones.descriptorArbolBinario(usuarioNombre);
         } catch (IOException ex) {
             Logger.getLogger(Ventana_Usuario.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -121,6 +121,63 @@ public class descriptor_listas_canciones {
         myWriter.close();
     
     }
+  
+    public static void descriptorArbolBinario(String usuario) throws IOException
+    {   
+        BufferedReader reader = new BufferedReader(new FileReader("C:\\MEIA\\desc_arbol_binario.txt"));
+        
+        if (reader.readLine() == null) {
+            FileWriter myWriter = new FileWriter("C:\\MEIA\\desc_arbol_binario.txt");
+            myWriter.write
+            (
+                     "nombre_simbolico: desc_arbol_binario"
+                    +"\nfecha_creacion: " + descriptor.modDate() 
+                    +"\nusuario_creacion: " + usuario
+                    +"\nfecha_modificacion: " + descriptor.modDate()
+                    + "\nusuario_modificacion: " + usuario
+                    + "\n#_registros: " + descriptor.numRegistros("C:\\MEIA\\arbol_binario.txt")
+                    + "\nregistros_activos: " + descriptor.numRegistros("C:\\MEIA\\arbol_binario.txt")
+                    + "\nregistros_inactivos: 0"       
+            );
+
+            myWriter.close();     
+            
+        }
+        else
+        {
+           descriptorArbolBinarioModificado(usuario); 
+        }
+        
+    
+    }
+  
+  public static void descriptorArbolBinarioModificado(String mod) throws IOException {
+         
+        BufferedReader reader = new BufferedReader(new FileReader("C:\\MEIA\\desc_arbol_binario.txt"));
+        ArrayList<String> str = new ArrayList<>();
+        String line = "";
+         
+        for (int i = 0; i < 3; i++) 
+        {
+            line = reader.readLine();
+            str.add(line); 
+        }
+        FileWriter myWriter = new FileWriter("C:\\MEIA\\desc_arbol_binario.txt");
+        myWriter.write
+        (
+                 str.get(0)
+                +"\n"+str.get(1)
+                +"\n"+str.get(2)
+                +"\nfecha_modificacion: " + descriptor.modDate()
+                + "\nusuario_modificacion: " + mod
+                + "\n#_registros: " + descriptor.numRegistros("C:\\MEIA\\arbol_binario.txt")
+                + "\nregistros_activos: " + descriptor.numRegistros("C:\\MEIA\\arbol_binario.txt")
+                + "\nregistros_inactivos: 0" 
+        );
+        
+        myWriter.close();
+    
+    }
         
 }
     
