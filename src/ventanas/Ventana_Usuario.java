@@ -857,6 +857,67 @@ public class Ventana_Usuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        File archivo = new File("C:\\MEIA\\arbol_binario.txt");
+        archivo.delete();
+        ArchivoArbolBinario arbolBinario = new ArchivoArbolBinario();
+
+        Date date = new Date();
+        SimpleDateFormat ft = new SimpleDateFormat("dd.MM.yyyy 'at' hh:mm");
+        String FechaActual = ft.format(date);
+
+        //Actualizar Descriptor
+        if (EsPrimero()) {
+            arbolBinario.EscribirDescriptor("arbol_binario", "Arbol Binario", usuarioNombre, FechaActual, FechaActual, 1, 0, 0, 0);
+        }
+        int status = 1;
+
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("C:\\MEIA\\canciones.txt"));
+            BufferedReader reader1 = new BufferedReader(new FileReader("C:\\MEIA\\bitacora_canciones.txt"));
+            String line = "";
+            String line1 = "";
+
+            while ((line = reader.readLine()) != null) {
+
+                String[] split = line.split("\\|");
+                String campo_0 = split[0];
+                String campo_1 = split[1];
+                String campo_2 = split[2];
+                String campo_3 = split[3];
+
+                String linea = "-" + "|" + "-" + "|" + campo_2 + "|" + campo_0 + "|" + campo_1 + "|" + campo_3 + "|" + usuarioNombre + "|" + FechaActual + "|" + status;
+                arbolBinario.EscribirEnArchivo("arbol_binario", linea);
+
+            }
+            reader.close();
+
+            while ((line1 = reader1.readLine()) != null) {
+
+                String[] split = line1.split("\\|");
+                String campo_0 = split[0];
+                String campo_1 = split[1];
+                String campo_2 = split[2];
+                String campo_3 = split[3];
+
+                String linea1 = "-" + "|" + "-" + "|" + campo_2 + "|" + campo_0 + "|" + campo_1 + "|" + campo_3 + "|" + usuarioNombre + "|" + FechaActual + "|" + status;
+                arbolBinario.EscribirEnArchivo("arbol_binario", linea1);
+
+            }
+            reader1.close();
+
+            sortBinarySearchTree.sortArtist();
+        } catch (Exception err) {
+
+        }
+
+        // TODO add your handling code here:
+        //descriptor_listas_canciones.descriptorArbolBinario(usuarioNombre);
+
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        File archivo = new File("C:\\MEIA\\arbol_binario.txt");
+        archivo.delete();
         ArchivoArbolBinario arbolBinario = new ArchivoArbolBinario();
 
         Date date = new Date();
@@ -902,25 +963,10 @@ public class Ventana_Usuario extends javax.swing.JFrame {
 
             }
             reader1.close();
-
+            
+            sortBinarySearchTree.sortSong();
         } catch (Exception err) {
 
-        }
-
-        // TODO add your handling code here:
-        //sortBinarySearchTree.sortArtist();
-        //descriptor_listas_canciones.descriptorArbolBinario(usuarioNombre);
-
-    }//GEN-LAST:event_jButton10ActionPerformed
-
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        try {
-
-            // TODO add your handling code here:
-            sortBinarySearchTree.sortSong();
-            descriptor_listas_canciones.descriptorArbolBinario(usuarioNombre);
-        } catch (IOException ex) {
-            Logger.getLogger(Ventana_Usuario.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton11ActionPerformed
 

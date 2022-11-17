@@ -5,12 +5,14 @@
  */
 package ventanas;
 
+import clases.ArchivoArbolBinario;
 import clases.Musica;
 import clases.actualizar;
 import clases.bitacoraBackUp;
 import clases.descriptor;
 import clases.descriptor_canciones;
 import clases.ficheros;
+import clases.sortBinarySearchTree;
 import clases.write_bitacora_backup;
 import clases.write_bitacora_descriptor;
 import clases.write_usuario_descriptor;
@@ -125,6 +127,8 @@ public class Ventana_Administrador extends javax.swing.JFrame {
         jTextField3 = new javax.swing.JTextField();
         jCalendar1 = new com.toedter.calendar.JCalendar();
         btnCargarMusica = new javax.swing.JButton();
+        jButton13 = new javax.swing.JButton();
+        jButton14 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -345,6 +349,20 @@ public class Ventana_Administrador extends javax.swing.JFrame {
             }
         });
 
+        jButton13.setText("Ordenar por Artista");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
+
+        jButton14.setText("Ordenar por Cancion");
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton14ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -471,7 +489,12 @@ public class Ventana_Administrador extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 752, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnCargarMusica)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton13)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton14))
+                            .addComponent(btnCargarMusica))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -509,6 +532,10 @@ public class Ventana_Administrador extends javax.swing.JFrame {
                                     .addComponent(btn_imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jButton13)
+                                    .addComponent(jButton14))
+                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel1)
                                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1014,6 +1041,119 @@ public class Ventana_Administrador extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCargarMusicaActionPerformed
 
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        File archivo = new File("C:\\MEIA\\arbol_binario.txt");
+        archivo.delete();
+        ArchivoArbolBinario arbolBinario = new ArchivoArbolBinario();
+
+        Date date = new Date();
+        SimpleDateFormat ft = new SimpleDateFormat("dd.MM.yyyy 'at' hh:mm");
+        String FechaActual = ft.format(date);
+
+        //Actualizar Descriptor
+        if (EsPrimero()) {
+            arbolBinario.EscribirDescriptor("arbol_binario", "Arbol Binario", usuarioNombre, FechaActual, FechaActual, 1, 0, 0, 0);
+        }
+        int status = 1;
+
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("C:\\MEIA\\canciones.txt"));
+            BufferedReader reader1 = new BufferedReader(new FileReader("C:\\MEIA\\bitacora_canciones.txt"));
+            String line = "";
+            String line1 = "";
+
+            while ((line = reader.readLine()) != null) {
+
+                String[] split = line.split("\\|");
+                String campo_0 = split[0];
+                String campo_1 = split[1];
+                String campo_2 = split[2];
+                String campo_3 = split[3];
+
+                String linea = "-" + "|" + "-" + "|" + campo_2 + "|" + campo_0 + "|" + campo_1 + "|" + campo_3 + "|" + usuarioNombre + "|" + FechaActual + "|" + status;
+                arbolBinario.EscribirEnArchivo("arbol_binario", linea);
+
+            }
+            reader.close();
+
+            while ((line1 = reader1.readLine()) != null) {
+
+                String[] split = line1.split("\\|");
+                String campo_0 = split[0];
+                String campo_1 = split[1];
+                String campo_2 = split[2];
+                String campo_3 = split[3];
+
+                String linea1 = "-" + "|" + "-" + "|" + campo_2 + "|" + campo_0 + "|" + campo_1 + "|" + campo_3 + "|" + usuarioNombre + "|" + FechaActual + "|" + status;
+                arbolBinario.EscribirEnArchivo("arbol_binario", linea1);
+
+            }
+            reader1.close();
+
+            sortBinarySearchTree.sortArtist();
+        } catch (Exception err) {
+
+        }
+
+        // TODO add your handling code here:
+        //descriptor_listas_canciones.descriptorArbolBinario(usuarioNombre);
+    }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        File archivo = new File("C:\\MEIA\\arbol_binario.txt");
+        archivo.delete();
+        ArchivoArbolBinario arbolBinario = new ArchivoArbolBinario();
+
+        Date date = new Date();
+        SimpleDateFormat ft = new SimpleDateFormat("dd.MM.yyyy 'at' hh:mm");
+        String FechaActual = ft.format(date);
+
+        //Actualizar Descriptor
+        if (EsPrimero()) {
+            arbolBinario.EscribirDescriptor("arbol_binario", "Arbol Binario", usuarioNombre, FechaActual, FechaActual, 1, 0, 0, 0);
+        }
+        int status = 1;
+
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("C:\\MEIA\\canciones.txt"));
+            BufferedReader reader1 = new BufferedReader(new FileReader("C:\\MEIA\\bitacora_canciones.txt"));
+            String line = "";
+            String line1 = "";
+
+            while ((line = reader.readLine()) != null) {
+
+                String[] split = line.split("\\|");
+                String campo_0 = split[0];
+                String campo_1 = split[1];
+                String campo_2 = split[2];
+                String campo_3 = split[3];
+
+                String linea= "-" + "|" + "-" + "|" + campo_2 + "|" + campo_0 + "|" + campo_1 + "|" + campo_3 + "|" + usuarioNombre + "|" + FechaActual + "|" + status;
+                arbolBinario.EscribirEnArchivo("arbol_binario", linea);
+
+            }
+            reader.close();
+
+            while ((line1 = reader1.readLine()) != null) {
+
+                String[] split = line1.split("\\|");
+                String campo_0 = split[0];
+                String campo_1 = split[1];
+                String campo_2 = split[2];
+                String campo_3 = split[3];
+
+                String linea1= "-" + "|" + "-" + "|" + campo_2 + "|" + campo_0 + "|" + campo_1 + "|" + campo_3 + "|" + usuarioNombre + "|" + FechaActual + "|" + status;
+                arbolBinario.EscribirEnArchivo("arbol_binario", linea1);
+
+            }
+            reader1.close();
+
+            sortBinarySearchTree.sortSong();
+        } catch (Exception err) {
+
+        }
+    }//GEN-LAST:event_jButton14ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1048,7 +1188,11 @@ public class Ventana_Administrador extends javax.swing.JFrame {
             }
         });
     }
+    public boolean EsPrimero() {
+        File Archivo = new File("C:\\MEIA\\arbol_binario.txt");
 
+        return Archivo.length() == 0;
+    }
     public void colocarImagen(String path) {
         try {
             File file = new File(path);
@@ -1088,6 +1232,8 @@ public class Ventana_Administrador extends javax.swing.JFrame {
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton13;
+    private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
