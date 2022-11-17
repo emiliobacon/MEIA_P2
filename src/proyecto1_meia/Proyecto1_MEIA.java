@@ -37,6 +37,8 @@ public class Proyecto1_MEIA {
         fichero.crearFicheroNoDesc("C:\\MEIA\\desc_bitacora_canciones.txt");
         fichero.crearFicheroNoDesc("C:\\MEIA\\desc_canciones.txt");
         fichero.crearFicheroNoDesc("C:\\MEIA\\desc_listas_canciones.txt");
+        fichero.crearFicheroNoDesc("C:\\MEIA\\arbol_binario.txt");
+        fichero.crearFicheroNoDesc("C:\\MEIA\\desc_arbol_binario.txt");
         
        Ventana_login menu = new Ventana_login();
        menu.setVisible(true); 

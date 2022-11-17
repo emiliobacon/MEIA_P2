@@ -6,6 +6,7 @@
 package ventanas;
 
 import clases.CrearPlaylist;
+import clases.ArchivoArbolBinario;
 import clases.ArchivoSecuencialIndizado;
 import clases.PlaySong;
 import java.awt.Image;
@@ -37,67 +38,65 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import jaco.mp3.player.MP3Player;
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Collections;
 
 /**
  *
  * @author megan
  */
 public class Ventana_Usuario extends javax.swing.JFrame {
+
     File archivo;
     String usuarioNombre = Ventana_login.usuarioNombre;
     String Pathusuario = Ventana_login.pathUsuario;
-    
+
     ArrayList array = new ArrayList();
     DefaultListModel modelo = new DefaultListModel();
-    
+
     ArrayList array2 = new ArrayList();
     DefaultListModel modelo2 = new DefaultListModel();
-    
+
     ArrayList array3 = new ArrayList();
-    DefaultListModel modelo3 = new DefaultListModel();    
-    
-    
+    DefaultListModel modelo3 = new DefaultListModel();
+
     /**
      * Creates new form Ventana_Usuario
      */
-    public Ventana_Usuario() throws IOException {  
+    public Ventana_Usuario() throws IOException {
         initComponents();
-        
-                try {
+
+        try {
             actualizarListaPlaylists();
         } catch (IOException ex) {
             Logger.getLogger(Ventana_Usuario.class.getName()).log(Level.SEVERE, null, ex);
         }
-                
+
         label_usuario.setText(usuarioNombre);
         colocarImagen(Pathusuario);
         jList1.setModel(modelo2);
-        
+
         BufferedReader reader = new BufferedReader(new FileReader("C:\\MEIA\\canciones.txt"));
         BufferedReader reader2 = new BufferedReader(new FileReader("C:\\MEIA\\bitacora_canciones.txt"));
         ArrayList<String> str = new ArrayList<>();
         String line = "";
-    
-        while ((line = reader.readLine()) != null)
-        {  
-            String[] split = line.split("\\|");
-            String prueba = split[1] + "-" +split[2];
-            
 
-            array2.add(prueba);                          
-        }
-        reader.close(); 
-        
-        while ((line = reader2.readLine()) != null)
-        {  
+        while ((line = reader.readLine()) != null) {
             String[] split = line.split("\\|");
-            String prueba = split[1] + "-" +split[2];
-            
+            String prueba = split[1] + "-" + split[2];
 
-            array2.add(prueba);                          
+            array2.add(prueba);
         }
-        reader2.close(); 
-        
+        reader.close();
+
+        while ((line = reader2.readLine()) != null) {
+            String[] split = line.split("\\|");
+            String prueba = split[1] + "-" + split[2];
+
+            array2.add(prueba);
+        }
+        reader2.close();
+
         modelo2.removeAllElements();
         for (int i = 0; i < array2.size(); i++) {
             modelo2.addElement(array2.get(i));
@@ -582,29 +581,28 @@ public class Ventana_Usuario extends javax.swing.JFrame {
     private void btn_imagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_imagenActionPerformed
         int resultado;
         Ventana_cargarImagen buscarImagen = new Ventana_cargarImagen();
-        FileNameExtensionFilter formatoArchivo = new FileNameExtensionFilter("JPG, PNG", "png","jpg"); //colocar formato en flitros
+        FileNameExtensionFilter formatoArchivo = new FileNameExtensionFilter("JPG, PNG", "png", "jpg"); //colocar formato en flitros
         buscarImagen.jFileChooser1.setFileFilter(formatoArchivo);
 
         resultado = buscarImagen.jFileChooser1.showOpenDialog(null); //guardar el resultado de ok o cancelar
 
-        if(JFileChooser.APPROVE_OPTION == resultado){
+        if (JFileChooser.APPROVE_OPTION == resultado) {
             archivo = buscarImagen.jFileChooser1.getSelectedFile();
             jPath.setText(archivo.getAbsolutePath()); //accedo a la ruta
             try {
-                actualizar.actualizar(usuarioNombre, archivo.getAbsolutePath() , 8);
-                actualizar.actualizar2(usuarioNombre, archivo.getAbsolutePath() , 8);
-                
+                actualizar.actualizar(usuarioNombre, archivo.getAbsolutePath(), 8);
+                actualizar.actualizar2(usuarioNombre, archivo.getAbsolutePath(), 8);
+
                 write_usuario_descriptor.run(usuarioNombre);
                 write_bitacora_descriptor.run(usuarioNombre);
             } catch (IOException ex) {
                 Logger.getLogger(Ventana_Usuario.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            try{
+            try {
                 ImageIcon imagenUusuario = new ImageIcon(archivo.toString());
 
-            }
-            catch (Exception error){
+            } catch (Exception error) {
                 JOptionPane.showMessageDialog(null, "No se pudo abrir el archivo: " + error);
             }
 
@@ -613,25 +611,25 @@ public class Ventana_Usuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_imagenActionPerformed
 
     private void jPasswordField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField1KeyTyped
-        if(jPasswordField1.getText().length()>=40){
+        if (jPasswordField1.getText().length() >= 40) {
             evt.consume();
         }
     }//GEN-LAST:event_jPasswordField1KeyTyped
 
     private void jTextField5KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField5KeyTyped
-        if(jTextField5.getText().length()>=40){
+        if (jTextField5.getText().length() >= 40) {
             evt.consume();
         }
     }//GEN-LAST:event_jTextField5KeyTyped
 
     private void txt_TelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_TelefonoKeyTyped
-        if(txt_Telefono.getText().length()>=8){
+        if (txt_Telefono.getText().length() >= 8) {
             evt.consume();
         }
     }//GEN-LAST:event_txt_TelefonoKeyTyped
 
     private void jPathKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPathKeyTyped
-        if(jPath.getText().length()>=200){
+        if (jPath.getText().length() >= 200) {
             evt.consume();
         }
     }//GEN-LAST:event_jPathKeyTyped
@@ -641,26 +639,25 @@ public class Ventana_Usuario extends javax.swing.JFrame {
         try {
             actualizar.actualizar(usuarioNombre, Password, 3);
             actualizar.actualizar2(usuarioNombre, Password, 3);
-            
+
             write_usuario_descriptor.run(usuarioNombre);
             write_bitacora_descriptor.run(usuarioNombre);
         } catch (IOException ex) {
             Logger.getLogger(Ventana_Usuario.class.getName()).log(Level.SEVERE, null, ex);
         }
-      
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         String Correo = jTextField5.getText();
         try {
             actualizar.actualizar(usuarioNombre, Correo, 6);
-            
+
             actualizar.actualizar2(usuarioNombre, Correo, 6);
-            
+
             write_usuario_descriptor.run(usuarioNombre);
             write_bitacora_descriptor.run(usuarioNombre);
-            
-            
+
         } catch (IOException ex) {
             Logger.getLogger(Ventana_Usuario.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -671,21 +668,21 @@ public class Ventana_Usuario extends javax.swing.JFrame {
         try {
             actualizar.actualizar(usuarioNombre, txt_Telefono.getText(), 7);
             actualizar.actualizar2(usuarioNombre, txt_Telefono.getText(), 7);
-            
+
             write_usuario_descriptor.run(usuarioNombre);
             write_bitacora_descriptor.run(usuarioNombre);
         } catch (IOException ex) {
             Logger.getLogger(Ventana_Usuario.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       Date Fecha = jCalendar1.getDate();
-       try {
+        Date Fecha = jCalendar1.getDate();
+        try {
             actualizar.actualizar(usuarioNombre, Fecha.toString(), 5);
             actualizar.actualizar2(usuarioNombre, Fecha.toString(), 5);
-            
+
             write_usuario_descriptor.run(usuarioNombre);
             write_bitacora_descriptor.run(usuarioNombre);
         } catch (IOException ex) {
@@ -695,13 +692,14 @@ public class Ventana_Usuario extends javax.swing.JFrame {
 
     /**
      * cerrar cuenta
-     * @param evt 
+     *
+     * @param evt
      */
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         try {
             actualizar.actualizar(usuarioNombre, "0", 9);
             actualizar.actualizar2(usuarioNombre, "0", 9);
-            
+
             write_usuario_descriptor.run(usuarioNombre);
             write_bitacora_descriptor.run(usuarioNombre);
         } catch (IOException ex) {
@@ -716,184 +714,208 @@ public class Ventana_Usuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        
-        
+
         try {
             // TODO add your handling code here:
-            
+
             String nombrePlaylist = txtNombrePlaylist.getText();
-            
+
             CrearPlaylist.reorganizar();
             CrearPlaylist.CrearPlaylist(nombrePlaylist, usuarioNombre);
             txtNombrePlaylist.setText("Playlist creada");
             descriptor_listas_canciones.descriptorBitacora(usuarioNombre);
             descriptor_listas_canciones.descriptorListas(usuarioNombre);
-            
-            modelo.removeAllElements();    
+
+            modelo.removeAllElements();
             actualizarListaPlaylists();
         } catch (IOException ex) {
-            
+
         }
 
-            
-     
+
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void PlaylistsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_PlaylistsValueChanged
-        
+
         try {
             // TODO add your handling code here:
             lblPlaylistElegida.setText(Playlists.getSelectedValue());
             playlistAgregar.setText(Playlists.getSelectedValue());
             String playlist = Playlists.getSelectedValue();
-            
+
             cancionesLista(playlist, usuarioNombre);
         } catch (IOException ex) {
             Logger.getLogger(Ventana_Usuario.class.getName()).log(Level.SEVERE, null, ex);
         }
-      
-        
-       
-        
-       
-     
-       
-        
+
+
     }//GEN-LAST:event_PlaylistsValueChanged
 
-    public void cancionesLista(String Playlist, String usuario) throws FileNotFoundException, IOException
-    { 
+    public void cancionesLista(String Playlist, String usuario) throws FileNotFoundException, IOException {
         jList2.setModel(modelo3);
-        
+
         BufferedReader reader = new BufferedReader(new FileReader("C:\\MEIA\\Indice.txt"));
-       
-        
+
         ArrayList<String> str = new ArrayList<>();
-        String line = "";   
+        String line = "";
         String line2 = "";
         String line3 = "";
-        while ((line = reader.readLine()) != null)
-        {  
+        while ((line = reader.readLine()) != null) {
             BufferedReader reader2 = new BufferedReader(new FileReader("C:\\MEIA\\bitacora_canciones.txt"));
-            BufferedReader reader3 = new BufferedReader(new FileReader("C:\\MEIA\\canciones.txt")); 
-            
-            
+            BufferedReader reader3 = new BufferedReader(new FileReader("C:\\MEIA\\canciones.txt"));
+
             String[] split = line.split("\\|");
             String playlist = split[3];
             String codigo = split[4];
             String Usuario = split[2];
-            
+
             if (playlist.equals(Playlist) && usuario.equals(Usuario)) {
-                
+
                 //leer canciones en la primera ubicacion
-                while((line2 = reader2.readLine()) != null )
-                {
+                while ((line2 = reader2.readLine()) != null) {
                     String[] split2 = line2.split("\\|");
                     String codigoCancion = split2[0];
                     String cancion = split2[1] + "-" + split2[2];
-                    
-                    if (codigo.equals(codigoCancion)) 
-                    {                       
+
+                    if (codigo.equals(codigoCancion)) {
                         array3.add(cancion);
                         line2 = "";
                     }
                 }
                 reader2.close();
-                
+
                 //canciones en la segunda ubicacion
-                while((line3 = reader3.readLine()) != null )
-                {
+                while ((line3 = reader3.readLine()) != null) {
                     String[] split3 = line3.split("\\|");
                     String codigoCancion = split3[0];
                     String cancion = split3[1] + "-" + split3[2];
-                    
-                    if (codigo.equals(codigoCancion)) 
-                    {                       
+
+                    if (codigo.equals(codigoCancion)) {
                         array3.add(cancion);
-                        line3 ="";
+                        line3 = "";
                     }
                 }
                 reader3.close();
-                
-            }       
+
+            }
         }
-        reader.close(); 
-        
-        
-        
+        reader.close();
+
         modelo3.removeAllElements();
-        for (int i = 0; i < array3.size(); i++) 
-        {
+        for (int i = 0; i < array3.size(); i++) {
             modelo3.addElement(array3.get(i));
         }
         array3.removeAll(array3);
-        
-        
-     
+
     }
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
-        ArchivoSecuencialIndizado archivoSec = new ArchivoSecuencialIndizado() ;
-        
+        ArchivoSecuencialIndizado archivoSec = new ArchivoSecuencialIndizado();
+
         try {
             archivoSec.insercion(usuarioNombre, playlistAgregar.getText(), canciones_playlist.Codigo_Cancion(musicaagregar.getText()));
             //jLabel12.setText(canciones_playlist.Concatenar(usuarioNombre,playlistAgregar.getText(),musicaagregar.getText()));
         } catch (IOException ex) {
             Logger.getLogger(Ventana_Usuario.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
+
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
         // TODO add your handling code here:
         musicaagregar.setText(jList1.getSelectedValue());
         btnPlay.setText("Reproducir:" + jList1.getSelectedValue());
-        
-        
+
         PlaySong.Crear(jList1.getSelectedValue());
-        
-       
+
+
     }//GEN-LAST:event_jList1ValueChanged
 
     private void jList2ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList2ValueChanged
         // TODO add your handling code here:
-         btnPlay.setText("Reproducir:" + jList2.getSelectedValue());
-         PlaySong.Crear(jList2.getSelectedValue());
+        btnPlay.setText("Reproducir:" + jList2.getSelectedValue());
+        PlaySong.Crear(jList2.getSelectedValue());
     }//GEN-LAST:event_jList2ValueChanged
 
     private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
         // TODO add your handling code here:
         String cancion = btnPlay.getText();
         String[] ruta = cancion.split(":");
-       
-         PlaySong.Siguiente();
-         PlaySong.Siguiente();
-         PlaySong.Siguiente();
-         
-        
-       
-        
+
+        PlaySong.Siguiente();
+        PlaySong.Siguiente();
+        PlaySong.Siguiente();
+
+
     }//GEN-LAST:event_btnPlayActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
         PlaySong.Stop();
-       
+
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        try {
-            // TODO add your handling code here:
-            sortBinarySearchTree.sortArtist();
-            descriptor_listas_canciones.descriptorArbolBinario(usuarioNombre);
-        } catch (IOException ex) {
-            Logger.getLogger(Ventana_Usuario.class.getName()).log(Level.SEVERE, null, ex);
+        ArchivoArbolBinario arbolBinario = new ArchivoArbolBinario();
+
+        Date date = new Date();
+        SimpleDateFormat ft = new SimpleDateFormat("dd.MM.yyyy 'at' hh:mm");
+        String FechaActual = ft.format(date);
+
+        //Actualizar Descriptor
+        if (EsPrimero()) {
+            arbolBinario.EscribirDescriptor("arbol_binario", "Arbol Binario", usuarioNombre, FechaActual, FechaActual, 1, 0, 0, 0);
         }
+        int status = 1;
+
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("C:\\MEIA\\canciones.txt"));
+            BufferedReader reader1 = new BufferedReader(new FileReader("C:\\MEIA\\bitacora_canciones.txt"));
+            String line = "";
+            String line1 = "";
+
+            while ((line = reader.readLine()) != null) {
+
+                String[] split = line.split("\\|");
+                String campo_0 = split[0];
+                String campo_1 = split[1];
+                String campo_2 = split[2];
+                String campo_3 = split[3];
+
+                String linea= "-" + "|" + "-" + "|" + campo_2 + "|" + campo_0 + "|" + campo_1 + "|" + campo_3 + "|" + usuarioNombre + "|" + FechaActual + "|" + status;
+                arbolBinario.EscribirEnArchivo("arbol_binario", linea);
+
+            }
+            reader.close();
+            
+            while ((line1 = reader1.readLine()) != null) {
+
+                String[] split = line1.split("\\|");
+                String campo_0 = split[0];
+                String campo_1 = split[1];
+                String campo_2 = split[2];
+                String campo_3 = split[3];
+
+                String linea1= "-" + "|" + "-" + "|" + campo_2 + "|" + campo_0 + "|" + campo_1 + "|" + campo_3 + "|" + usuarioNombre + "|" + FechaActual + "|" + status;
+                arbolBinario.EscribirEnArchivo("arbol_binario", linea1);
+
+            }
+            reader1.close();
+
+        } catch (Exception err) {
+
+        }
+
+        // TODO add your handling code here:
+        //sortBinarySearchTree.sortArtist();
+        //descriptor_listas_canciones.descriptorArbolBinario(usuarioNombre);
+
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         try {
+
             // TODO add your handling code here:
             sortBinarySearchTree.sortSong();
             descriptor_listas_canciones.descriptorArbolBinario(usuarioNombre);
@@ -901,57 +923,58 @@ public class Ventana_Usuario extends javax.swing.JFrame {
             Logger.getLogger(Ventana_Usuario.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton11ActionPerformed
-    
-    public void vaciarPlaylist()
-    {
+
+    public void vaciarPlaylist() {
         Playlists.setModel(modelo);
         modelo.removeAllElements();
-        
+
     }
-    public void actualizarListaPlaylists () throws FileNotFoundException, IOException
-    {
-        
+
+    public boolean EsPrimero() {
+        File Archivo = new File("C:\\MEIA\\arbol_binario.txt");
+
+        return Archivo.length() == 0;
+    }
+
+    public void actualizarListaPlaylists() throws FileNotFoundException, IOException {
+
         BufferedReader reader = new BufferedReader(new FileReader("C:\\MEIA\\listas_canciones.txt"));
         BufferedReader reader2 = new BufferedReader(new FileReader("C:\\MEIA\\bitacora_listas_canciones.txt"));
         Playlists.setModel(modelo);
-       
- 
+
         ArrayList<String> str = new ArrayList<>();
         String line = "";
-    
-        while ((line = reader.readLine()) != null)
-        {  
+
+        while ((line = reader.readLine()) != null) {
             String[] split = line.split("\\|");
-            
+
             String prueba = split[1];
             String usuario = split[0];
-            
-              
+
             if (usuario.equals(usuarioNombre)) {
-              array.add(prueba);  
-            }                          
+                array.add(prueba);
+            }
         }
         reader.close();
-        while ((line = reader2.readLine()) != null)
-        {  
+        while ((line = reader2.readLine()) != null) {
             String[] split = line.split("\\|");
-            
+
             String prueba = split[1];
             String usuario = split[0];
-            
-              
+
             if (usuario.equals(usuarioNombre)) {
-              array.add(prueba);  
-            }                          
+                array.add(prueba);
+            }
         }
-        reader2.close(); 
-        
+        reader2.close();
+
         modelo.removeAllElements();
         for (int i = 0; i < array.size(); i++) {
             modelo.addElement(array.get(i));
         }
         array.removeAll(array);
     }
+
     /**
      * @param args the command line arguments
      */
@@ -990,19 +1013,19 @@ public class Ventana_Usuario extends javax.swing.JFrame {
             }
         });
     }
-    
-    public void colocarImagen (String path){
-        try{
+
+    public void colocarImagen(String path) {
+        try {
             File file = new File(path);
             BufferedImage bufferedImage = ImageIO.read(file);
             ImageIcon imageIcon = new ImageIcon(bufferedImage);
             Icon icon = new ImageIcon(imageIcon.getImage().getScaledInstance(LabelFoto.getWidth(), LabelFoto.getWidth(), Image.SCALE_DEFAULT));
-            LabelFoto.setIcon(icon);   
-        }
-        catch(Exception error){
-            
+            LabelFoto.setIcon(icon);
+        } catch (Exception error) {
+
         }
     }
+
     public static String getMD5(String input) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
@@ -1011,15 +1034,14 @@ public class Ventana_Usuario extends javax.swing.JFrame {
             String hashtext = number.toString(16);
 
             while (hashtext.length() < 32) {
-            hashtext = "0" + hashtext;
+                hashtext = "0" + hashtext;
             }
             return hashtext;
-        }
-        catch (NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelFoto;
